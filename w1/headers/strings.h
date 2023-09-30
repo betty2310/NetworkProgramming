@@ -1,17 +1,17 @@
-#define MENU    "USER MANAGEMENT PROGRAM\n"\
-                "-----------------------------------\n" \
-                "1. Register\n" \
-                "2. Sign in\n" \
-                "3. Search\n" \
-                "4. Sign out\n" \
-                "Your choice (1-4, other to quit): "
+#define MENU "USER MANAGEMENT PROGRAM\n"             \
+             "-----------------------------------\n" \
+             "1. Register\n"                         \
+             "2. Sign in\n"                          \
+             "3. Search\n"                           \
+             "4. Sign out\n"                         \
+             "Your choice (1-4, other to quit): "
 
-#define LOGGED_MENU "USER MANAGEMENT PROGRAM\n"\
+#define LOGGED_MENU "USER MANAGEMENT PROGRAM\n"             \
                     "-----------------------------------\n" \
-                    "User: %s\n" \
-                    "1. Register\n" \
-                    "3. Search\n" \
-                    "4. Sign out\n" \
+                    "User: %s\n"                            \
+                    "1. Register\n"                         \
+                    "3. Search\n"                           \
+                    "4. Sign out\n"                         \
                     "Your choice (1-4, other to quit): "
 
 #define HOW_TO_USE "Usage: %s <file>\n"
