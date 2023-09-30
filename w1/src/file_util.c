@@ -3,9 +3,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <strings.h>
+#include <string.h>
 
-FILE* f;
+extern FILE* f;
 
 node* read_file(char* file_name, node** head) {
     f = fopen(file_name, "r");
@@ -16,7 +16,9 @@ node* read_file(char* file_name, node** head) {
     Account acc;
     acc.username = (char*) malloc(MAX_USERNAME_LENGTH * sizeof(char));
     acc.password = (char*) malloc(MAX_PASSWORD_LENGTH * sizeof(char));
-    while(fscanf(f, "%s %s %d", acc.username, acc.password, &acc.status) != EOF) {
+    int status;
+    while(fscanf(f, "%s %s %d", acc.username, acc.password, &status) != EOF) {
+	acc.status = (enum Status)status;
         push(head, acc);
         // reallocate memory for next account
         acc.username = (char*) malloc(MAX_USERNAME_LENGTH * sizeof(char));
