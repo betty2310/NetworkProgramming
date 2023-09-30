@@ -1,10 +1,26 @@
 CC = gcc
+CFLAGS = -Wall
+
+SRC_DIR = src
+HDR_DIR = headers
+
+SOURCES = $(wildcard $(SRC_DIR)/*.c)
+HEADERS = $(wildcard $(HDR_DIR)/*.h)
+OBJECTS = $(SOURCES:.c=.o)
+
+MAIN_SOURCE = main.c
+TARGET = main
+DATA = account.txt
 
 all: run
 
-run: main.c
-	$(CC) main.c -o main
-	./main
+run: $(OBJECTS) $(MAIN_SOURCE)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJECTS) $(MAIN_SOURCE)
+	./$(TARGET) $(DATA)
 
-clean: main
-	rm -f main
+%.o: %.c $(HEADERS)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	rm -f $(OBJECTS) $(TARGET)
+

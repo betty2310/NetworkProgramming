@@ -1,3 +1,6 @@
+#define MAX_USERNAME_LENGTH 20
+#define MAX_PASSWORD_LENGTH 20
+
 enum Status {
     BLOCKED,
     ACTIVE
@@ -8,7 +11,3 @@ typedef struct Account {
     char* password;
     enum Status status;
 } Account;
-
-void getAccount(Account *acc);
-
-Account *setAccount(char *username, char *password, enum Status status);
