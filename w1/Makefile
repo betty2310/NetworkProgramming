@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall
+CFLAGS = -Wall -g
 
 SRC_DIR = src
 HDR_DIR = headers
@@ -17,6 +17,9 @@ all: run
 run: $(OBJECTS) $(MAIN_SOURCE)
 	$(CC) $(CFLAGS) -o $(TARGET) $(OBJECTS) $(MAIN_SOURCE)
 	./$(TARGET) $(DATA)
+
+compile: $(OBJECTS)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJECTS) $(MAIN_SOURCE)
 
 %.o: %.c $(HEADERS)
 	$(CC) $(CFLAGS) -c $< -o $@
