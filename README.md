@@ -1,13 +1,10 @@
-## Network Programming
+## Network Programming `IT4062`
 
-```
-IT4062
-Hedspi 20231
-```
 
 ### Using docker 🐳
 
-Run on Ubuntu 22.04
+The environment required by this project is run on Ubuntu:22.04, so if you
+don't like Ubuntu like me (I use Arch, btw). Docker is best for now.
 
 ```shell
 docker build -t nw .
