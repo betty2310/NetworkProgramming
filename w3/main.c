@@ -10,7 +10,7 @@ extractLinks(xmlNode* a_node, FILE* csvFile) {
             xmlChar* href = xmlGetProp(cur_node, (const xmlChar*) "href");
             if (href) {
                 fprintf(csvFile, "%s\n", href);
-                xmlFree(href);   // Free memory to avoid leaks
+                xmlFree(href);
             }
         }
 
