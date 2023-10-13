@@ -20,10 +20,12 @@ main(int argc, char** argv) {
         return 1;
     }
 
-    if (!inet_pton(AF_INET, argv[1], &ip)) {
-        hostname_to_ip(argv[1]);
+    char* host = argv[1];
+
+    if (!inet_pton(AF_INET, host, &ip)) {
+        hostname_to_ip(host);
     } else
-        ip_to_hostname(argv[1], ip);
+        ip_to_hostname(host, ip);
 }
 
 void
@@ -45,7 +47,6 @@ hostname_to_ip(char* host) {
 
 void
 ip_to_hostname(char* host, struct in_addr ip) {
-
     struct hostent* host_info;
     if ((host_info = gethostbyaddr((const void*) &ip, sizeof ip, AF_INET)) ==
         NULL) {
