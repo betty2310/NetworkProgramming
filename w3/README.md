@@ -1,4 +1,4 @@
-### Install require lib 
+### Lib dependencies
 
 ```bash
 sudo apt-get install -y libcurl4-openssl-dev

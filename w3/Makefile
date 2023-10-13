@@ -1,27 +1,21 @@
 CC = gcc
 CFLAGS = -Wall -g --std=c11
 
-SRC_DIR = src
-HDR_DIR = headers
+HTML_FILE = file.html
 
-SOURCES = $(wildcard $(SRC_DIR)/*.c)
-HEADERS = $(wildcard $(HDR_DIR)/*.h)
-OBJECTS = $(SOURCES:.c=.o)
-
-MAIN_SOURCE = main.c
-TARGET = resolver
+CSV_OUTPUT = links.csv
 
 all: run
 
-run: $(OBJECTS) $(MAIN_SOURCE)
-	$(CC) $(CFLAGS) -o $(TARGET) $(OBJECTS) $(MAIN_SOURCE) -lcurl -I/usr/include/libxml2 -lxml2
+run: main.o crawler.o
+	$(CC) $(CFLAGS) main.o crawler.o -o resolver -lcurl -I/usr/include/libxml2 -lxml2
 
-compile: $(OBJECTS)
-	$(CC) $(CFLAGS) -o $(TARGET) $(OBJECTS) $(MAIN_SOURCE)
+main.o: main.c crawler.h
+	$(CC) $(CFLAGS) -c main.c -o main.o -lcurl -I/usr/include/libxml2 -lxml2
 
-%.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) -c $< -o $@
+crawler.o: crawler.c crawler.h
+	$(CC) $(CFLAGS) -c crawler.c -o crawler.o -lcurl
 
 clean:
-	rm -f $(OBJECTS) $(TARGET)
+	rm -f resolver *.o $(HTML_FILE) $(CSV_OUTPUT)
 
