@@ -1,27 +1,12 @@
 CC = gcc
-CFLAGS = -Wall -g
 
-SRC_DIR = src
-HDR_DIR = headers
+all: client server
 
-SOURCES = $(wildcard $(SRC_DIR)/*.c)
-HEADERS = $(wildcard $(HDR_DIR)/*.h)
-OBJECTS = $(SOURCES:.c=.o)
+client: client.c
+	${CC} client.c  -o client
 
-TARGET = main
-
-all: run
-
-run: $(OBJECTS) 
-	$(CC) $(CFLAGS) -o $(TARGET) $(OBJECTS)
-	./$(TARGET) 
-
-compile: $(OBJECTS)
-	$(CC) $(CFLAGS) -o $(TARGET) $(OBJECTS)
-
-%.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) -c $< -o $@
+server: server.c
+	${CC} server.c  -o server
 
 clean:
-	rm -f $(OBJECTS) $(TARGET)
-
+	rm -f *.o server client
