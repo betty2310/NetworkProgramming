@@ -1,12 +1,11 @@
-BasedOnStyle: LLVM
+BasedOnStyle: Google
+ColumnLimit: 100
 IndentWidth: 4
 PointerAlignment: Left
-ColumnLimit: 80
 SpaceAfterCStyleCast: true
 UseTab: Never
 AllowShortIfStatementsOnASingleLine: false
 AlignTrailingComments: true
 SpacesBeforeTrailingComments: 3
-AlwaysBreakAfterReturnType: TopLevelDefinitions
 AlignConsecutiveMacros: Consecutive
 UseCRLF: false
