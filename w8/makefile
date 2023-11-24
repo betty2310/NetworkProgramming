@@ -7,7 +7,7 @@ client: client.c
 	$(CC) $(CFLAGS) -o client client.c
 
 server: server.c
-	$(CC) $(CFLAGS) -o server server.c
+	$(CC) $(CFLAGS) -o server linkedlist.c server.c
 
 
 clean:

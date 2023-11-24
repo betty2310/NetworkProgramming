@@ -1,10 +1,10 @@
-#include <stdio.h>
-#include <netinet/in.h>
 #include <arpa/inet.h>
+#include <netinet/in.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <sys/socket.h>
 #include <sys/types.h>
-#include <string.h>
-#include <stdlib.h>
 #include <unistd.h>
 
 #define BUFF_SIZE 8192
@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
         printf("Correct format is /.client YourId YourPort\n");
         return 1;
     }
-    //check if input id is valid
+    // check if input id is valid
     if (isValidIpAddress(argv[1]) == 0) {
         printf("%s Not a valid ip address\n", argv[1]);
         return 1;
@@ -33,21 +33,21 @@ int main(int argc, char *argv[]) {
     int client_sock;
     struct sockaddr_in server_addr; /* server's address information */
 
-    //Step 1: Construct socket
+    // Step 1: Construct socket
     client_sock = socket(AF_INET, SOCK_STREAM, 0);
 
-    //Step 2: Specify server address
+    // Step 2: Specify server address
     server_addr.sin_family = AF_INET;
     server_addr.sin_port = htons(atoi(argv[2]));
     server_addr.sin_addr.s_addr = inet_addr(argv[1]);
 
-    //Step 3: Request to connect server
+    // Step 3: Request to connect server
     if (connect(client_sock, (struct sockaddr *) &server_addr, sizeof(struct sockaddr)) < 0) {
         printf("\nError!Can not connect to sever! Client exit immediately! ");
         return 0;
     }
 
-    //Step 4: Communicate with server
+    // Step 4: Communicate with server
     while (1) {
         char username[BUFF_SIZE];
         char password[BUFF_SIZE];
@@ -64,14 +64,14 @@ int main(int argc, char *argv[]) {
         bytes_received = recv(client_sock, usernameMsg, BUFF_SIZE - 1, 0);
         usernameMsg[bytes_received] = '\0';
 
-        //send password to server
+        // send password to server
         printf("Password: ");
         fgets(password, BUFF_SIZE, stdin);
         send(client_sock, password, strlen(password), 0);
         bytes_received = recv(client_sock, passwordMsg, BUFF_SIZE - 1, 0);
         passwordMsg[bytes_received] = '\0';
 
-        //receive login status
+        // receive login status
         systemMsg_bytes_received = recv(client_sock, systemMsg, BUFF_SIZE - 1, 0);
         if (systemMsg_bytes_received <= 0) {
             printf("\nError!Cannot receive data from sever!\n");
@@ -81,13 +81,13 @@ int main(int argc, char *argv[]) {
         printf("%s\n", systemMsg);
         if (strcmp(systemMsg, "Hello! Successful login.\n") == 0) {
             printf("Press any key to continue\n");
-            while(getchar() != '\n');
-            close(client_sock);
-            return (1);
+            while (getchar() != '\n')
+                ;
+            continue;
         }
     }
 
-    //Step 4: Close socket
+    // Step 4: Close socket
     close(client_sock);
     return 0;
 }
